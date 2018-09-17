@@ -19,5 +19,6 @@
         </form>
         Your age next birthday will be: ${age}
         <div>${message}</div>
+        <a href="arithmetic">Arithmetic Calculator</a>
     </body>
 </html>
