@@ -35,11 +35,10 @@ public class ArithmeticCalculatorServlet extends HttpServlet {
        int numOne = 0;
        int numTwo = 0;
        int product = 0;
-//         int age = Integer.parseInt(ageStr);
         try{
         
         if(numOneStr == null || numOneStr.equals("") || numTwoStr == null || numTwoStr.equals("")){
-          request.setAttribute("message", "invalid");
+          request.setAttribute("product", "invalid");
             getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculator.jsp").forward(request,response);
             return;
         }
