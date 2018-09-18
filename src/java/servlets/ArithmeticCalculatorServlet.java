@@ -23,6 +23,7 @@ public class ArithmeticCalculatorServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setAttribute("product", "---");
         getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculator.jsp").forward(request,response);
     }
 
@@ -33,6 +34,7 @@ public class ArithmeticCalculatorServlet extends HttpServlet {
         String numTwoStr = request.getParameter("numTwo");
        int numOne = 0;
        int numTwo = 0;
+       int product = 0;
 //         int age = Integer.parseInt(ageStr);
         try{
         
@@ -44,13 +46,28 @@ public class ArithmeticCalculatorServlet extends HttpServlet {
         numOne = Integer.parseInt(numOneStr);
         numTwo = Integer.parseInt(numTwoStr);
         }catch(NumberFormatException e){
-                      request.setAttribute("message", "invalid");
+                      request.setAttribute("product", "invalid");
             getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculator.jsp").forward(request,response);
             return;
         }
+        if(request.getParameter("operation").equals("+")){
+
+           product = numOne+numTwo; 
+        }
+        if(request.getParameter("operation").equals("-")){
+           product = numOne-numTwo; 
+        }
+        if(request.getParameter("operation").equals("*")){
+           product = numOne*numTwo; 
+        }
+        if(request.getParameter("operation").equals("%")){
+           product = numOne%numTwo; 
+        }
          
          
-         int product = numOne+numTwo;
+        
+       request.setAttribute("numOne",numOne );
+       request.setAttribute("numTwo",numTwo );
         request.setAttribute("product", product);
                 getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculator.jsp").forward(request,response);
 
