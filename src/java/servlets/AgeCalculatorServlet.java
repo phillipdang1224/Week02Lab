@@ -1,4 +1,3 @@
-
 package servlets;
 
 import java.io.IOException;
@@ -17,35 +16,33 @@ public class AgeCalculatorServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        getServletContext().getRequestDispatcher("/WEB-INF/agecalculator.jsp").forward(request,response);
+        getServletContext().getRequestDispatcher("/WEB-INF/agecalculator.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String ageStr = request.getParameter("age");
-       int age = 0;
+        int age = 0;
 //         int age = Integer.parseInt(ageStr);
-        try{
-        
-        if(ageStr == null || ageStr.equals("")){
-          request.setAttribute("message", "You must give your current age");
-            getServletContext().getRequestDispatcher("/WEB-INF/agecalculator.jsp").forward(request,response);
+        try {
+
+            if (ageStr == null || ageStr.equals("")) {
+                request.setAttribute("message", "You must give your current age");
+                getServletContext().getRequestDispatcher("/WEB-INF/agecalculator.jsp").forward(request, response);
+                return;
+            }
+            age = Integer.parseInt(ageStr);
+        } catch (NumberFormatException e) {
+            request.setAttribute("message", "You must give your current age");
+            getServletContext().getRequestDispatcher("/WEB-INF/agecalculator.jsp").forward(request, response);
             return;
         }
-        age = Integer.parseInt(ageStr);
-        }catch(NumberFormatException e){
-                      request.setAttribute("message", "You must give your current age");
-            getServletContext().getRequestDispatcher("/WEB-INF/agecalculator.jsp").forward(request,response);
-            return;
-        }
-         
-         
-         int newAge = age+1;
+
+        int newAge = age + 1;
         request.setAttribute("age", newAge);
-                getServletContext().getRequestDispatcher("/WEB-INF/age.jsp").forward(request,response);
+        getServletContext().getRequestDispatcher("/WEB-INF/age.jsp").forward(request, response);
 
     }
 
-
-} 
+}
